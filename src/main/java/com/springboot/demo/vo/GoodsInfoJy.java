@@ -1,4 +1,4 @@
-package com.springboot.demo.jy.vo;
+package com.springboot.demo.vo;
 
 import java.util.Date;
 

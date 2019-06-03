@@ -1,7 +1,7 @@
-package com.springboot.demo.jy.controller;
+package com.springboot.demo.controller;
 
-import com.springboot.demo.jy.service.GoodsInfoJyService;
-import com.springboot.demo.jy.vo.GoodsInfoJy;
+import com.springboot.demo.service.GoodsInfoJyService;
+import com.springboot.demo.vo.GoodsInfoJy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,6 @@
-package com.springboot.demo.jy.mapper;
+package com.springboot.demo.mapper;
 
-import com.springboot.demo.jy.vo.GoodsInfoJy;
+import com.springboot.demo.vo.GoodsInfoJy;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

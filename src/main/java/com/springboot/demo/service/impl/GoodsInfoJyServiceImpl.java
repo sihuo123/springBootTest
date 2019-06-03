@@ -1,8 +1,8 @@
-package com.springboot.demo.jy.service.impl;
+package com.springboot.demo.service.impl;
 
-import com.springboot.demo.jy.mapper.GoodsInfoJyMapper;
-import com.springboot.demo.jy.service.GoodsInfoJyService;
-import com.springboot.demo.jy.vo.GoodsInfoJy;
+import com.springboot.demo.mapper.GoodsInfoJyMapper;
+import com.springboot.demo.service.GoodsInfoJyService;
+import com.springboot.demo.vo.GoodsInfoJy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

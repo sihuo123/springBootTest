@@ -1,6 +1,6 @@
-package com.springboot.demo.jy.service;
+package com.springboot.demo.service;
 
-import com.springboot.demo.jy.vo.GoodsInfoJy;
+import com.springboot.demo.vo.GoodsInfoJy;
 
 import java.util.List;
 

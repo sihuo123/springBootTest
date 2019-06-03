@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     name: mydata
-    url: jdbc:mysql://192.168.1.125:3306/test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=CTT&useUnicode=true
+    url: jdbc:mysql://192.169.1.66:3306/springboottest?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=CTT&useUnicode=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
