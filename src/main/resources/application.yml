@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    name: mydata
+    url: jdbc:mysql://192.168.1.125:3306/test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=CTT&useUnicode=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # 使用druid数据源
+  type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml  #classpath就是应用程序resources的路径
+  type-aliases-package: com.springboot.demo
