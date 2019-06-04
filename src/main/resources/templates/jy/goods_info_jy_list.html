@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <script src="../js/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>货物名</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="good:${goods}">
+                <td th:text="${good.id}"></td>
+                <td th:text="${good.goodsName}"></td>
+                <td th:text="${#dates.format(good.createtime, 'yyy-MMM-ddd HH:mm')}"></td>
+                <td>
+                    <button class="btn btn-sm btn-primary">编辑</button>
+                    <button class="btn btn-sm btn-danger"  th:attr="goodsid=${good.id}" onclick="deleteGoods(this)">删除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script>
+    function deleteGoods(obj){
+        var id = $(obj).attr("goodsid");
+        $.post("/jy/delete",{id: id},function(result){
+            alert(result);
+            location.reload();
+        });
+    }
+</script>
+
+</html>

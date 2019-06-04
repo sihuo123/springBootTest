@@ -33,6 +33,13 @@ public class JyController {
         return "jy/hello";
     }
 
+    @RequestMapping("/toGoodsList")
+    public String toGoodsList(Model model){
+        List<GoodsInfoJy> list = goodsInfoJyService.selectAll();
+        model.addAttribute("goods",list);
+        return "jy/goods_info_jy_list";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/selectAll")
     public String selectAll(){
@@ -49,8 +56,17 @@ public class JyController {
     }
 
     @PostMapping(value = "/add")
-    public void add(GoodsInfoJy goodsInfoJy){
+    public String add(GoodsInfoJy goodsInfoJy){
         goodsInfoJyService.addGoodsInfoJy(goodsInfoJy);
+        return "jy/goods_info_jy_add";
+    }
+
+    @RequestMapping(value = "/delete")
+    @ResponseBody
+    public Boolean add(String id){
+        System.out.println("============deleteId[" + id + "]============");
+        goodsInfoJyService.deleteById(id);
+        return true;
     }
 
 }

@@ -38,4 +38,9 @@ public class GoodsInfoJyServiceImpl implements GoodsInfoJyService {
         goodsInfoJy.setCreatetime(crDate);
         goodsInfoJyMapper.insert(goodsInfoJy);
     }
+
+    @Override
+    public void deleteById(String id) {
+        goodsInfoJyMapper.deleteByPrimaryKey(id);
+    }
 }
