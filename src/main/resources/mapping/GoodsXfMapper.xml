@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.demo.mapper.GoodsXfMapper">
+
+  <select id="getGoodsXfs" parameterType="com.springboot.demo.vo.GoodsXf" resultType="com.springboot.demo.vo.GoodsXf">
+    SELECT * FROM goods_xf
+    <where>
+      <if test="serNumber!=null and serNumber!=''">
+        and serNumber=#{serNumber}
+      </if>
+      <if test="tradeName!=null and tradeName!=''">
+        and tradeName=#{tradeName}
+      </if>
+      <if test="classify!=null and classify!=''">
+        and classify=#{classify}
+      </if>
+      <if test="id!=null and id!=''">
+        and id = #{id}
+      </if>
+    </where>
+  </select>
+
+  <delete id="delGoodsXfByIds" parameterType="list">
+    DELETE FROM goods_xf WHERE id IN
+    <foreach collection="array" item="li" open="(" separator="," close=")">
+      #{li}
+    </foreach>
+  </delete>
+
+</mapper>
