@@ -5,6 +5,7 @@ import com.springboot.demo.vo.GoodsInfoJy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,6 +33,13 @@ public class JyController {
         return "jy/hello";
     }
 
+    @RequestMapping("/toGoodsList")
+    public String toGoodsList(Model model){
+        List<GoodsInfoJy> list = goodsInfoJyService.selectAll();
+        model.addAttribute("goods",list);
+        return "jy/goods_info_jy_list";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/selectAll")
     public String selectAll(){
@@ -40,9 +48,25 @@ public class JyController {
         return s;
     }
 
-    @RequestMapping(value = "/add")
-    public void add(GoodsInfoJy goodsInfoJy){
+    @RequestMapping("/toAdd")
+    public String toAdd(Model model){
+        model.addAttribute("msg","新增页面");
+        System.out.println("toAdd");
+        return "jy/goods_info_jy_add";
+    }
+
+    @PostMapping(value = "/add")
+    public String add(GoodsInfoJy goodsInfoJy){
         goodsInfoJyService.addGoodsInfoJy(goodsInfoJy);
+        return "jy/goods_info_jy_add";
+    }
+
+    @RequestMapping(value = "/delete")
+    @ResponseBody
+    public Boolean add(String id){
+        System.out.println("============deleteId[" + id + "]============");
+        goodsInfoJyService.deleteById(id);
+        return true;
     }
 
 }

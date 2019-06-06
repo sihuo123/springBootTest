@@ -6,7 +6,9 @@ import com.springboot.demo.vo.GoodsInfoJy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName: GoodsServiceImpl
@@ -30,6 +32,15 @@ public class GoodsInfoJyServiceImpl implements GoodsInfoJyService {
 
     @Override
     public void addGoodsInfoJy(GoodsInfoJy goodsInfoJy) {
+        String id = UUID.randomUUID().toString();
+        Date crDate = new Date();
+        goodsInfoJy.setId(id);
+        goodsInfoJy.setCreatetime(crDate);
         goodsInfoJyMapper.insert(goodsInfoJy);
+    }
+
+    @Override
+    public void deleteById(String id) {
+        goodsInfoJyMapper.deleteByPrimaryKey(id);
     }
 }

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <script src="/js/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <form action="/xf/query" method="post">
+        <table border="1">
+            <tr>
+                <td>序列号：<input name="serNumber" type="text"/></td>
+                <td>商品名称：<input name="tradeName" type="text"/></td>
+            </tr>
+            <tr>
+                <td>商品类别：<input name="classify" type="text"/></td>
+                <td><input value="查询" type="submit"/></td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+    <div id="div">
+        <button id="add">添加</button>  <button id="del">删除</button>
+    </div>
+    <br/>
+    <table border="1" id="tab1">
+        <thead>
+        <tr>
+            <th><input id="ckb" type="checkbox"/></th>
+            <th>序列号</th>
+            <th>商品名称</th>
+            <th>商品类别</th>
+            <th>商品描述</th>
+            <th>商品价格</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${goodsXfs}">
+            <td><input type="checkbox" name="box" th:value="${item.id}"/></td>
+            <td th:text="${item.serNumber}"></td>
+            <td th:text="${item.tradeName}"></td>
+            <td th:text="${item.classify}"></td>
+            <td th:text="${item.describe}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.createTime}"></td>
+            <td th:text="${item.updateTime}"></td>
+            <td><a th:attr="goodsid=${item.id}" onclick="edit(this)">编辑</a>  <a th:attr="goodsid=${item.id}" onclick="del(this)">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="/xf/update" method="post" id="f2">
+        <table id="tab2" border="1" style="display: none">
+            <tr style="display: none">
+                <td>id：</td>
+                <td><input name="id1" type="text" disabled/>
+                    <input name="id" type="hidden"/></td>
+            </tr>
+            <tr>
+                <td>序列号：</td>
+                <td><input name="serNumber1" type="text" disabled/>
+                    <input name="serNumber" type="hidden"/></td>
+            </tr>
+            <tr>
+                <td>商品名称：</td>
+                <td><input name="tradeName" type="text"/></td>
+            </tr>
+            <tr>
+                <td>商品类别：</td>
+                <td><input name="classify" type="text"/></td>
+            </tr>
+            <tr>
+                <td>商品描述：</td>
+                <td><input name="describe" type="text"/></td>
+            </tr>
+            <tr>
+                <td>商品价格：</td>
+                <td><input name="price" type="text"/></td>
+            </tr>
+            <tr>
+                <td><input value="修改" type="submit"/></td>
+                <td><a href="/xf/load">返回</a></td>
+            </tr>
+        </table>
+    </form>
+
+    <form id="f3" action="/xf/add" method="post">
+        <table id="tab3" style="display: none" border="1">
+            <tr>
+                <td>商品名称：</td>
+                <td><input name="tradeName" type="text"/></td>
+            </tr>
+            <tr>
+                <td>商品类别：</td>
+                <td><input name="classify" type="text"/></td>
+            </tr>
+            <tr>
+                <td>商品描述：</td>
+                <td><input name="describe" type="text"/></td>
+            </tr>
+            <tr>
+                <td>商品价格：</td>
+                <td><input name="price" type="text"/></td>
+            </tr>
+            <tr>
+                <td><input value="添加" type="submit"/></td>
+                <td><a href="/xf/load">返回</a></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+<script>
+    function edit(obj) {
+        var id = $(obj).attr("goodsid");
+        $.post("/xf/toUpdate",{id:id},function (res){
+            //console.info(res);
+            $("#tab1").hide();
+            $("#tab2").show();
+            $("#tab3").hide();
+            $("#div").hide();
+            $("#f2 input[name=id1]").val(res.id);
+            $("#f2 input[name=serNumber1]").val(res.serNumber);
+            $("#f2 input[name=id]").val(res.id);
+            $("#f2 input[name=serNumber]").val(res.serNumber);
+            $("#f2 input[name=tradeName]").val(res.tradeName);
+            $("#f2 input[name=classify]").val(res.classify);
+            $("#f2 input[name=describe]").val(res.describe);
+            $("#f2 input[name=price]").val(res.price);
+        });
+    }
+    $("#add").click(function () {
+        $("#tab1").hide();
+        $("#tab2").hide();
+        $("#tab3").show();
+        $("#div").hide();
+    });
+    $("#ckb").click(function () {
+       if($("#ckb").is(":checked")){
+            $("input[type=checkbox]").prop("checked",true);
+       }else{
+           $("input[type=checkbox]").prop("checked",false);
+       }
+    });
+    $("#del").click(function () {
+        var list = new Array();
+        $("input[name=box]").each(function () {
+            if($(this).is(":checked")){
+                list.push($(this).val());
+            }
+        });
+        console.info(list);
+        $.ajax({
+            url:"/xf/delByIds",
+            data:{list:list},
+            type: "post",
+            traditional: true,
+            success:function () {
+                window.location.reload();
+            }
+        });
+    });
+
+    function del(obj) {
+        var id = $(obj).attr("goodsid");
+        var that = $(obj);
+        $.ajax({
+            url: "/xf/delById",
+            data: {id: id},
+            type: "post",
+            traditional: true,
+            success: function () {
+                that.parent().parent().remove();
+            }
+        });
+    }
+
+</script>
+</html>

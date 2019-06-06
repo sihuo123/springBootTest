@@ -19,4 +19,6 @@ public interface GoodsInfoJyService {
 
     public void addGoodsInfoJy(GoodsInfoJy goodsInfoJy);
 
+    public void deleteById(String id);
+
 }
