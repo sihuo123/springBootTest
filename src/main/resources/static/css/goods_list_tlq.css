@@ -1,0 +1,70 @@
+#goods_table table{
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+/*#goods_table table tr{*/
+table tr{
+    height: 40px;
+}
+table td{
+    width: 100px;
+}
+#goods_table table tr td,#goods_table table tr th{
+/*table tr td,table tr th{*/
+    border: 1px solid #ccc;
+    /*border-right: none;
+    border-left: none;*/
+    /*width: 100px;*/
+}
+#editDiv,#addDiv{
+    padding: 20px 20px;
+    width: 300px;
+}
+a{
+    color: #fd6d16;
+}
+a:hover{
+    color: #e46d26;
+}
+a:visited{
+    /*color: #0000EE;*/
+    color: #fd6d16;
+}
+/*#addBtn,#delBtn{*/
+button{
+    margin-bottom: 15px;
+    width: 70px;
+    height: 35px;
+    border: none;
+    background: #fd6d16;
+    /*background: #438bfb;*/
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 5px;
+}
+/*#addBtn:hover,#delBtn:hover,#cancel:hover{*/
+button:hover,#cancel:hover{
+    background: #e46d26;
+    cursor: pointer;
+}
+#cancel{
+    width: 70px;
+    height: 35px;
+    border: none;
+    background: #fd6d16;
+    border-radius: 5px;
+    line-height: 35px;
+    text-align: center;
+    float: right;
+}
+#cancel a{
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: 5px;
+}
+input[type="text"]{
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 25px;
+}

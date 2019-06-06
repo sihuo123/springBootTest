@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品</title>
+    <link rel="stylesheet" type="text/css" href="css/goods_list_tlq.css">
+    <script src="../js/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <div id="add">
+        <h5>添加商品:</h5>
+        <form action="/add" method="post">
+            <table>
+                <!--<tr >
+                    <td><input type="hidden" name="goodsId"/></td>
+                </tr>-->
+                <tr>
+                    <td>商品编号:</td>
+                    <td><input type="text" name="goodsNum"/></td>
+                </tr>
+                <tr>
+                    <td>商品名称:</td>
+                    <td><input type="text" name="goodsName"/></td>
+                </tr>
+                <tr>
+                    <td>商品价格:</td>
+                    <td><input type="text"name="goodsPrice"/></td>
+                </tr>
+                <tr>
+                    <td>商品库存:</td>
+                    <td><input type="text" name="goodsInventory"/></td>
+                </tr>
+                <tr align="right">
+                    <td colspan="2">
+                        <button>确定</button>&nbsp;&nbsp;
+                        <div id="cancel"><a href="/goods_list">取消</a></div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

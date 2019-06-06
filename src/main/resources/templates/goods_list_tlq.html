@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <link rel="stylesheet" type="text/css" href="css/goods_list_tlq.css">
+    <script src="../js/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <div id="goods_table">
+        <button id="addBtn" onclick="window.location='/toAdd'">新增</button>
+        <button id="delBtn">删除</button>
+        <table>
+            <thead>
+                <th><input type="checkbox" id="checkAll"/></th>
+                <th>商品ID</th>
+                <th>商品编号</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>商品库存</th>
+                <th>操作</th>
+            </thead>
+            <tbody id="checklist">
+                <tr align="center" th:each="goods: ${goodsList}">
+                    <td><input type="checkbox" name="checkbox" th:value="${goods.goodsId}"/></td>
+                    <td th:text="${goods.goodsId}"></td>
+                    <td th:text="${goods.goodsNum}"></td>
+                    <td th:text="${goods.goodsName}"></td>
+                    <td th:text="${goods.goodsPrice}"></td>
+                    <td th:text="${goods.goodsInventory}"></td>
+                    <td>
+                        <a href="javaScript:void(0)" th:onclick="|edit(${goods.goodsId})|" id="edit">修改</a>
+                        <a href="javaScript:void(0)" th:onclick="|del(${goods.goodsId})|" id="del">删除</a>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+
+    $(function () {
+
+        /*$("#checkAll").click(function(){
+            $("input[type=checkbox]").prop("checked",this.checked);
+        });
+        $("[type=checkbox]:checkbox").click(function(){
+            var tmp=$("[type=checkbox]:checkbox");
+            $("#checkAll").prop("checked",tmp.length==tmp.filter(":checked").length);
+        });*/
+
+        /*全选按钮状态显示判断*/
+        $("#checklist").find("input[type='checkbox']").click(function(){
+            /*初始化选择为TURE*/
+            $("#checkAll")[0].checked = true;
+            /*获取未选中的*/
+            var nocheckedList = new Array();
+            $("#checklist").find('input:not(:checked)').each(function() {
+                nocheckedList.push($(this).val());
+            });
+
+            /*状态显示*/
+            if (nocheckedList.length == $("#checklist").find('input').length) {
+                $("#checkAll")[0].checked = false;
+            }else if(nocheckedList.length ==0){
+                $("#checkAll")[0].checked = true;
+            }else if(nocheckedList.length){
+                $("#checkAll")[0].checked = false;
+            }
+        });
+        // 全选/取消
+        $("#checkAll").click(function(){
+            // alert(this.checked);
+            if ($(this).is(':checked')) {
+                $("#checklist").find('input').each(function(){
+                    $(this).prop("checked",true);
+                });
+
+            } else {
+                $("#checklist").find('input').each(function(){
+                    $(this).removeAttr("checked",false);
+                    $(this).prop("checked",false);
+                });
+            }
+        });
+    });
+
+    $("#delBtn").click(function () {
+        var arr = new Array();
+        $("input[name='checkbox']").each(function () {
+            if($(this).is(":checked")){
+                arr.push($(this).val());
+            }
+        });
+        //alert("选择的个数为：" + arr.length);
+        //alert("arr:"+arr)
+        if(arr.length == 0 || arr.length < 0){
+            alert("请选择要删除的商品！");
+            return;
+        }
+        $.ajax({
+            url:"/delByIds",
+            type:"post",
+            data:{arr: arr},
+            traditional: true,
+            success: function (result) {
+                if(result){
+                    alert("删除成功！")
+                }else{
+                    alert("删除失败！");
+                }
+                location.reload();
+            }
+        });
+    });
+
+    function edit(id) {
+        //alert(id);
+        window.location.href="/toEdit?id="+id;
+    }
+
+    function del(id) {
+        //alert("id:"+id);
+        $.ajax({
+            url:"/del",
+            type:"post",
+            data:{id: id},
+            success: function (result) {
+                if(result){
+                    alert("删除成功！")
+                }else{
+                    alert("删除失败！");
+                }
+                location.reload();
+            }
+        });
+    }
+</script>
+</html>
