@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../css/goodsManger.css">
+<head>
+    <meta charset="UTF-8">
+    <title>新增或修改商品</title>
+</head>
+<body>
+<div class="divContent">
+<div class="formDiv">
+
+    <table>
+        <tr><td> 商品编号：</td><td><input type="text" name="goodsNumber" id="goodsNumber" th:value="${goods.goodsNumber}"/></td></tr>
+        <tr><td> 商品名称：</td><td> <input type="text" name="goodsName" id="goodsName" th:value="${goods.goodsName}"/></td></tr>
+        <tr><td> 商品类型：</td>
+            <td>
+                <select  name="goodsType" id="goodsType" style="width: 176px">
+                    <option  th:each="typeList:${typeList}"  th:value="${typeList.id}"
+                     th:selected="${typeList.goodType eq goods.goodsTypeEntity.goodType }"
+                     th:text="${typeList.goodType}">
+                     </option>
+                </select>
+            </td>
+        </tr>
+        <tr><td>  商品价格：</td><td><input type="number" id="goodsInPrice" name="goodsInPrice" th:value="${goods.goodsInPrice}"/></td></tr>
+        <tr><td>  商品数量：</td><td> <input type="number" id="goodsNum" name="goodsNum" th:value="${goods.goodsNum}"/></td></tr>
+        <tr><td>  商品描述：</td><td><input type="text" id="goodsIntroduction" name="goodsIntroduction" th:value="${goods.goodsIntroduction}"/></td>
+        <tr><td colspan="2">
+        <button class="btn" th:onclick="|doUpdate(${goods.goodsId})|"> 确认</button> <button class="btn" th:onclick="|back()|"> 取消</button></td></tr>
+    </table>
+
+</div>
+</div>
+<script src="../js/jquery.min.js" ></script>
+<script src="../js/goodsManger.js" ></script>
+</body>
+</html>

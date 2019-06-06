@@ -1,0 +1,46 @@
+#tab{
+    margin-top: 5px;
+    width: 1000px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    border-collapse: collapse;
+    border-color: gainsboro;
+}
+#tab tr{
+    text-align: center;
+    line-height: 30px;
+}
+.btn{
+    padding: 5px;
+    background-color: orangered;
+    margin-left: 5px;
+    width: 70px;
+    color: white;
+    border-style: none;
+    border-radius: 3px;
+    letter-spacing: 4px;
+}
+.serch{
+    margin-top: 10px;
+}
+.formDiv{
+    width: 390px;
+    text-align: center;
+    margin:0 auto;
+}
+.formDiv input{
+    margin: 10px;
+}
+.pageInfo{
+    margin-left: 800px;
+}
+.pageInfo a{
+    margin-left: 5px;
+    text-decoration: none;
+
+}
+.pageInfo a:hover{
+    color: orangered;
+}
+
+

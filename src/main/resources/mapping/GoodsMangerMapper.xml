@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.demo.mapper.GoodMangerMapper" >
+  <!--自定义返回结果集-->
+  <resultMap id="goodsManger" type="com.springboot.demo.vo.GoodsEntity" >
+    <id column="goods_id" property="goodsId" javaType="java.lang.Integer" />
+    <result column="goods_price" property="goodsInPrice"  javaType="java.lang.Double"/>
+    <result column="goods_introduction" property="goodsIntroduction"  javaType="java.lang.String"/>
+    <result column="goods_name" property="goodsName" javaType="java.lang.String"/>
+    <result column="goods_num" property="goodsNum" javaType="java.lang.Integer" />
+    <result column="goods_number" property="goodsNumber" javaType="java.lang.String"/>
+    <association property="goodsTypeEntity" column="goods_type_id" javaType="com.springboot.demo.vo.GoodsTypeEntity">
+      <id property="id" column="id" javaType="java.lang.Integer"/>
+      <result property="goodType" column="good_type" javaType="java.lang.String"/>
+    </association>
+
+  </resultMap>
+
+  <resultMap id="goodsTypedManger" type="com.springboot.demo.vo.GoodsTypeEntity" >
+      <id property="id" column="id" javaType="java.lang.Integer"/>
+      <result property="goodType" column="good_type" javaType="java.lang.String"/>
+  </resultMap>
+  <!--查询结果集-->
+  <select id="findAllGoods"  parameterType="map"  resultMap="goodsManger">
+
+    SELECT * from goods g,good_type t where t.id=g.goods_type_id
+    <if test="goodsNumber!=null and goodsNumber!=''">
+      AND  g.goods_number=#{goodsNumber}
+    </if>
+    <if test="goodsName!=null and goodsName!=''">
+      AND  g.goods_name=#{goodsName}
+    </if>
+    <if test="goodType!=null and goodType!=''">
+      AND  t.good_type=#{goodType}
+    </if>
+  </select>
+
+  <!--查询结果集-->
+  <select id="findOneGoods"  parameterType="map"  resultMap="goodsManger">
+
+    SELECT * from goods   where goods_id =#{goodsId}
+
+  </select>
+  
+  <delete id="delGoodsList" >
+    DELETE  from  goods where goods_id in
+
+    <foreach item="item" index="index" collection="goodsId" open="(" separator="," close=")">
+                  ${item}
+    </foreach>
+  </delete>
+
+  <delete id="delGoods">
+    DELETE  from  goods where goods_id =#{goodsId}
+  </delete>
+  <!--查询类型-->
+  <select id="selectGoodsType" resultMap="goodsTypedManger">
+
+    SELECT * from  good_type;
+  </select>
+
+  <!--查询等额类型-->
+  <select id="selectGoodsTypeById" resultMap="goodsTypedManger" parameterType="java.lang.Integer">
+
+    SELECT * from  good_type WHERE id = #{id} ;
+  </select>
+  <!--插入商品-->
+  <insert id="insertGoods" >
+INSERT  INTO goods(goods_price,goods_introduction,goods_name,goods_num,goods_number,goods_type_id)
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsInPrice != null and goodsInPrice!=''" >
+        #{goodsInPrice},
+      </if>
+      <if test="goodsIntroduction != null and goodsIntroduction!=''" >
+        #{goodsIntroduction},
+      </if>
+      <if test="goodsName != null and goodsName!=''" >
+        #{goodsName},
+      </if>
+      <if test="goodsNum != null and goodsNum!=''" >
+        #{goodsNum},
+      </if>
+      <if test="goodsNumber != null and goodsNumber!=''" >
+        #{goodsNumber},
+      </if>
+      <if test="goodsTypeEntity != null " >
+        #{goodsTypeEntity.id},
+      </if>
+
+    </trim>
+  </insert>
+  
+  <update id="updateGoods">
+
+    UPDATE goods SET
+    <trim  suffixOverrides="," >
+    <if test="goodsInPrice != null and goodsInPrice!=''" >
+      goods_price = #{goodsInPrice},
+    </if>
+    <if test="goodsIntroduction != null and goodsIntroduction!=''" >
+      goods_introduction = #{goodsIntroduction},
+    </if>
+    <if test="goodsName != null and goodsName!=''" >
+      goods_name = #{goodsName},
+    </if>
+    <if test="goodsNum != null and goodsNum!=''" >
+      goods_num = #{goodsNum},
+    </if>
+    <if test="goodsNumber != null and goodsNumber!=''" >
+      goods_number =  #{goodsNumber},
+    </if>
+    <if test="goodsTypeEntity != null " >
+      goods_type_id = #{goodsTypeEntity.id},
+    </if>
+  </trim>
+    WHERE goods_id = #{goodsId}
+  </update>
+
+</mapper>
