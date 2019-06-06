@@ -10,12 +10,24 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   # 使用druid数据源
   type: com.alibaba.druid.pool.DruidDataSource
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
+  freemarker:
+    charset: utf-8
+    check-template-location: false
+    content-type: text/html
+    template-loader-path: /templates/
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml  #classpath就是应用程序resources的路径
   type-aliases-package: com.springboot.demo
+
+logging:
+  level:
+    com:
+     springboot:
+      demo:
+       mapper:debug
+

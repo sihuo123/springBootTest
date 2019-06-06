@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../css/goodsManger.css">
+<head>
+    <meta charset="UTF-8">
+    <title>商品管理页面</title>
+</head>
+<body>
+<button class="btn" th:onclick="|add()|">新增</button><button class="btn" th:onclick="|delAll()|">删除</button><button class="btn" th:onclick="|serach()|">查询</button>
+<div class="serch" id="divSerch" >
+    商品编号：<input type="text" name="goodNumber" id="goodNumber"/>
+    商品名称：<input type="text" name="goodsName" id="goodsName"/>
+    商品类型：<select  name="goodType" id="goodType"  style="width: 190px">
+    <option value="">全部</option>
+    <option th:each="typeList:${typeList}" th:text="${typeList.goodType}"></option>
+</select>
+</div>
+<table id="tab" border="1px" >
+    <thead>
+    <tr >
+        <td><input type="checkbox" name="checkAll" th:onclick="|checkAll()|" id="checkAll"></td>
+        <td>商品编号</td>
+        <td>商品类型</td>
+        <td>商品价格</td>
+        <td>商品数量</td>
+        <td>商品描述</td>
+        <td>商品名称</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+   <tbody >
+    <tr th:each="goodsList:${goodsList}">
+        <td ><input type="checkbox" name="goodsId" th:value="${goodsList.goodsId}"></td>
+        <td th:text="${goodsList.goodsNumber}"></td>
+        <td th:text="${goodsList.goodsTypeEntity.goodType}"></td>
+        <td th:text="${goodsList.goodsInPrice}"></td>
+        <td th:text="${goodsList.goodsNum}"></td>
+        <td th:text="${goodsList.goodsIntroduction}"></td>
+        <td th:text="${goodsList.goodsName}"></td>
+        <td><button class="btn" th:onclick="|del(${goodsList.goodsId})|">删除</button ><button class="btn" th:onclick="|update(${goodsList.goodsId})|">修改</button></td>
+    </tr>
+    </tbody>
+
+</table>
+<!--
+<div class="pageInfo" ><a href="">首页</a><a href="">上一页</a><a href="">下一页</a><a href="">尾页</a></div>-->
+<script src="../js/jquery.min.js" ></script>
+<script src="../js/goodsManger.js" ></script>
+</body>
+</html>
