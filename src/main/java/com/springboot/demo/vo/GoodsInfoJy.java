@@ -34,7 +34,7 @@ public class GoodsInfoJy {
     }
 
     public void setGoodsType(String goodsType) {
-        this.goodsType = goodsType == null ? null : goodsType.trim();
+        this.goodsType = goodsType;
     }
 
     public Date getCreatetime() {

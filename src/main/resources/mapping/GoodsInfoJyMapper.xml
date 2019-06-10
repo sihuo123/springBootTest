@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.springboot.demo.vo.GoodsInfoJy">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName" />
-    <result column="GOODS_TYPE" jdbcType="VARCHAR" property="goodsType" />
+    <result column="GOODS_TYPE" jdbcType="VARCHAR"  property="goodsType" />
     <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
     <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
   </resultMap>
@@ -95,5 +95,14 @@
       DESCRIPTION = #{description,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <delete id="deleteByIds">
+    delete from goods_info_jy
+    where ID in
+    <foreach collection="array" item="id" index="index" open="("
+             separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
 
 </mapper>

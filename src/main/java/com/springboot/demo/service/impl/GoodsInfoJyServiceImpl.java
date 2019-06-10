@@ -5,6 +5,7 @@ import com.springboot.demo.service.GoodsInfoJyService;
 import com.springboot.demo.vo.GoodsInfoJy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -43,4 +44,25 @@ public class GoodsInfoJyServiceImpl implements GoodsInfoJyService {
     public void deleteById(String id) {
         goodsInfoJyMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public void deleteByIds(String[] ids) {
+        goodsInfoJyMapper.deleteByIds(ids);
+    }
+
+    @Override
+    public GoodsInfoJy getGoodsInfoJyById(String id) {
+        return goodsInfoJyMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Boolean updateGoodsInfoJy(GoodsInfoJy goodsInfoJy) {
+        if(StringUtils.isEmpty(goodsInfoJy.getId())){
+            return false;
+        }
+        goodsInfoJyMapper.updateByPrimaryKeySelective(goodsInfoJy);
+        return true;
+    }
+
+
 }

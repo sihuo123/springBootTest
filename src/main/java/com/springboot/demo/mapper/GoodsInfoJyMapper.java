@@ -22,4 +22,6 @@ public interface GoodsInfoJyMapper {
     int updateByPrimaryKey(GoodsInfoJy record);
 
     List<GoodsInfoJy> selectAll();
+
+    void deleteByIds(String[] ids);
 }

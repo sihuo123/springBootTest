@@ -21,4 +21,10 @@ public interface GoodsInfoJyService {
 
     public void deleteById(String id);
 
+    public void deleteByIds(String[] ids);
+
+    public GoodsInfoJy getGoodsInfoJyById(String id);
+
+    public Boolean updateGoodsInfoJy(GoodsInfoJy goodsInfoJy);
+
 }

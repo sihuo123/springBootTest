@@ -17,3 +17,10 @@ spring:
 mybatis:
   mapper-locations: classpath:mapping/*.xml  #classpath就是应用程序resources的路径
   type-aliases-package: com.springboot.demo
+
+logging:
+  level:
+    com:
+      spring:
+        jiminshiro:
+          mapper: debug
