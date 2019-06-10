@@ -42,7 +42,7 @@ public class JyController {
         return "jy/index";
     }
 
-    @RequestMapping("/getById")
+    @RequestMapping("/toUpdate")
     public String toGoodsList(String id, Model model){
         model.addAttribute("id", id);
         model.addAttribute("goodsInfo", goodsInfoJyService.getGoodsInfoJyById(id));

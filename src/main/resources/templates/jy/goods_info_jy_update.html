@@ -15,19 +15,19 @@
     <input type="submit" value="提交" >
 </form>-->
 
-<form id='form' class="layui-form" action="/jy/add">
-    <input type="hidden" th:value="${id}">
+<form id='form' class="layui-form" action="/jy/update">
+    <input type="hidden" name="id" th:value="${id}" >
     <div class="layui-form-item">
         <label class="layui-form-label">商品名</label>
         <div class="layui-input-block">
             <input type="text" name="goodsName" required  lay-verify="required" placeholder="请输入商品名"
-                   autocomplete="off" class="layui-input" th:value="${goodsInfo.goodsName}">
+                   autocomplete="off" class="layui-input" th:value="${goodsInfo.goodsName}" >
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">商品说明</label>
         <div class="layui-input-block">
-            <textarea name="description" placeholder="请输入商品说明" class="layui-textarea"></textarea>
+            <textarea name="description" placeholder="请输入商品说明" class="layui-textarea" th:text="${goodsInfo.description}"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
