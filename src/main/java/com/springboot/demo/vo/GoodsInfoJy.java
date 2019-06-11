@@ -1,8 +1,9 @@
 package com.springboot.demo.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class GoodsInfoJy {
+public class GoodsInfoJy implements Serializable {
     private String id;
 
     private String goodsName;
