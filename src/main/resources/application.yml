@@ -1,5 +1,7 @@
 server:
   port: 8080
+  tomcat:
+    uri-encoding: UTF-8
 
 spring:
   datasource:
@@ -12,7 +14,11 @@ spring:
   type: com.alibaba.druid.pool.DruidDataSource
   thymeleaf:
     prefix: classpath:/templates/
-
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml  #classpath就是应用程序resources的路径
@@ -21,6 +27,6 @@ mybatis:
 logging:
   level:
     com:
-      spring:
-        jiminshiro:
+      springboot:
+        demo:
           mapper: debug

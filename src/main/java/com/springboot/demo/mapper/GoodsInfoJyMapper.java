@@ -24,4 +24,6 @@ public interface GoodsInfoJyMapper {
     List<GoodsInfoJy> selectAll();
 
     void deleteByIds(String[] ids);
+
+    int batchUpdate(List<GoodsInfoJy> list);
 }

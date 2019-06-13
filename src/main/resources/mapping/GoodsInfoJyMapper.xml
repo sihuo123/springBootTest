@@ -105,4 +105,20 @@
     </foreach>
   </delete>
 
+  <update id="batchUpdate" parameterType="java.util.List" useGeneratedKeys="false">
+    <foreach collection="list" item="record" index="index" open="" close="" separator=";">
+      update goods_info_jy
+      <set>
+        <if test="record.goodsName !=null">
+          GOODS_NAME = #{record.goodsName,jdbcType=OTHER},
+        </if>
+        <if test="record.description !=null">
+          DESCRIPTION = #{record.description,jdbcType=OTHER},
+        </if>
+      </set>
+      where
+      id = #{record.id}
+    </foreach>
+  </update>
+
 </mapper>
