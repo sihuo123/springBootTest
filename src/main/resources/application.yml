@@ -19,6 +19,18 @@ spring:
       force: true
       charset: UTF-8
       enabled: true
+  redis:
+    database: 0
+    host: 192.169.1.66
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+    timeout: 10000
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml  #classpath就是应用程序resources的路径
@@ -30,3 +42,4 @@ logging:
       springboot:
         demo:
           mapper: debug
+
